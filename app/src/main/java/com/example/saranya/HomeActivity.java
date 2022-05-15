@@ -33,6 +33,12 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MapDemoActivity.class);
+                //Create the bundle
+                Bundle bundle = new Bundle();
+                //Add your data to bundle
+                bundle.putString("ButtonClicked", "atm");
+                //Add the bundle to the intent
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -41,6 +47,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MapDemoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("ButtonClicked", "hospital");
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -49,6 +58,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MapDemoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("ButtonClicked", "police");
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -57,6 +69,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MapDemoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("ButtonClicked", "train_station");
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -65,6 +80,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MapDemoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("ButtonClicked", "airport");
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

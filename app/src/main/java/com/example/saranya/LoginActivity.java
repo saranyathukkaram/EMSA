@@ -15,6 +15,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText username;
     EditText password;
     Button btnlogin;
+    Button btnReg;
     DB_component DB;
 
     @Override
@@ -25,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
         username=(EditText) findViewById(R.id.username);
         password=(EditText) findViewById(R.id.password);
         btnlogin=(Button) findViewById(R.id.button);
+        btnReg=(Button) findViewById(R.id.button2);
         DB = new DB_component(this);
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +51,14 @@ public class LoginActivity extends AppCompatActivity {
 
             }
 
+        });
+
+        btnReg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intent);
+            }
         });
     }
 }

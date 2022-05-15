@@ -4,6 +4,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -12,47 +13,46 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 
 public class MapDemoActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    Button btnSearch;
     double latitude,longitude;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_demo);
-        btnSearch=(Button) findViewById(R.id.btn_Search);
-
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Toast.makeText(MapDemoActivity.this, "Invalid credentials", Toast.LENGTH_SHORT).show();
-                mMap.clear();
-                Object dataTransfer[] = new Object[2];
-                GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-
-                String hospital = "hospital";
-                String url = getUrl(13.070039, 80.248853, hospital);
-                dataTransfer[0] = mMap;
-                dataTransfer[1] = url;
-
-                getNearbyPlacesData.execute(dataTransfer);
-            }
-        });
-
+        //Get the bundle
+        Bundle bundle = getIntent().getExtras();
+        //Extract the data…
+        String searchText = bundle.getString("ButtonClicked");
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Map Search Code Begins
+                Toast.makeText(MapDemoActivity.this, "Searching "+searchText+"....", Toast.LENGTH_SHORT).show();
+                mMap.clear();
+                Object dataTransfer[] = new Object[2];
+                GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+
+                String url = getUrl(13.070039, 80.248853, searchText);
+                dataTransfer[0] = mMap;
+                dataTransfer[1] = url;
+
+                getNearbyPlacesData.execute(dataTransfer);
+                // Map Search Code Ends
+            }
+        }, 2000);
     }
 
 
